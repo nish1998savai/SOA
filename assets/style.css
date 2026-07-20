@@ -5,10 +5,8 @@
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/inter-latin-500-normal.woff2') format('woff2'); }
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/inter-latin-600-normal.woff2') format('woff2'); }
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/inter-latin-700-normal.woff2') format('woff2'); }
-@font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/playfair-display-latin-400-normal.woff2') format('woff2'); }
-@font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 400; font-display: swap; src: url('fonts/playfair-display-latin-400-italic.woff2') format('woff2'); }
-@font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 500; font-display: swap; src: url('fonts/playfair-display-latin-500-normal.woff2') format('woff2'); }
-@font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/playfair-display-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/instrument-serif-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap; src: url('fonts/instrument-serif-latin-400-italic.woff2') format('woff2'); }
 
 :root {
   --bg: #fdfaf5;
@@ -89,8 +87,8 @@ body {
   overflow-x: hidden;
 }
 h1, h2, h3, .serif {
-  font-family: 'Playfair Display', serif;
-  font-weight: 500;
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
   letter-spacing: 0.01em;
   margin: 0;
 }
@@ -131,7 +129,7 @@ header.scrolled { border-bottom-color: var(--border); }
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 1.1rem;
   letter-spacing: 0.03em;
   text-decoration: none;
@@ -403,7 +401,7 @@ blockquote {
   margin: 1.5rem 0 0;
   padding-left: 1.25rem;
   border-left: 2px solid var(--accent);
-  font-family: 'Playfair Display', serif;
+  font-family: 'Instrument Serif', serif;
   font-style: italic;
   font-size: 1.15rem;
   color: var(--fg);
@@ -648,7 +646,7 @@ ul.checklist li::before {
 }
 .gallery figcaption .work-title {
   display: block;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Instrument Serif', serif;
   font-style: italic;
   font-size: 0.95rem;
   color: var(--fg);
@@ -784,7 +782,7 @@ ul.checklist li::before {
   background: var(--accent);
   color: #fff;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Instrument Serif', serif;
   font-style: italic;
   font-size: 1.1rem;
   transform: translateZ(25px);
@@ -819,7 +817,7 @@ ul.checklist li::before {
 }
 @media (max-width: 640px) { .stat-row { grid-template-columns: 1fr; gap: 2rem; } }
 .stat-row .stat-num {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Instrument Serif', serif;
   font-size: 2.2rem;
   color: var(--accent);
   display: block;
