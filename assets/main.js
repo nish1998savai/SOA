@@ -18,6 +18,37 @@
   }
   setTimeout(hidePreloader, 3500); /* fallback: never block the page */
 
+  /* Logo-curtain page transitions: intercept internal page links, sweep
+     the terracotta curtain (with the mark) up over the page, then navigate.
+     The next page's preloader is the same curtain lifting away, so the
+     logo appears to carry you across pages. */
+  var curtain = document.getElementById('pt');
+  if (curtain && !reduced) {
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      if (href.indexOf('#') === 0 || href.indexOf('mailto:') === 0 ||
+          href.indexOf('tel:') === 0 || href.indexOf('http') === 0 ||
+          a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      /* same-page hash links (e.g. index.html#top while on index) scroll, no curtain */
+      var targetPage = href.split('#')[0];
+      var herePage = location.pathname.split('/').pop() || 'index.html';
+      if (targetPage === herePage || targetPage === '') return;
+      e.preventDefault();
+      curtain.classList.add('is-entering');
+      setTimeout(function () { window.location.href = href; }, 500);
+    });
+    /* back/forward-cache restore: make sure nothing is stuck covering the page */
+    window.addEventListener('pageshow', function (ev) {
+      if (ev.persisted) {
+        curtain.classList.remove('is-entering');
+        document.body.classList.add('is-loaded');
+      }
+    });
+  }
+
   /* Sticky header shadow state */
   var header = document.getElementById('site-header');
   if (header) {

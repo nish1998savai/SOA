@@ -18,28 +18,32 @@
   --border: rgba(28,23,18,0.12);
 }
 
-/* Preloader */
+/* Preloader — brand curtain: terracotta field, logo mark breathing in */
 #preloader {
   position: fixed;
   inset: 0;
   z-index: 999;
-  background: #17110b;
+  background: #c1591f;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  transition: transform 0.55s cubic-bezier(0.7, 0, 0.3, 1), visibility 0.55s;
 }
 #preloader .pre-mark {
-  width: 56px; height: 56px;
-  border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
+  width: 64px; height: 64px;
+  border-radius: 16px;
+  animation: markIn 0.9s cubic-bezier(0.2, 0.8, 0.3, 1.2) both;
+}
+@keyframes markIn {
+  0% { opacity: 0; transform: scale(0.4) rotate(-14deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
 }
 #preloader .pre-bar {
   position: absolute;
   bottom: -20px; left: 50%;
   transform: translateX(-50%);
   width: 90px; height: 2px;
-  background: rgba(247,237,225,0.18);
+  background: rgba(253,248,238,0.25);
   overflow: hidden;
   border-radius: 2px;
 }
@@ -48,7 +52,7 @@
   position: absolute;
   top: 0; bottom: 0; left: -40%;
   width: 40%;
-  background: #e88a4a;
+  background: #fdf8ee;
   animation: preloaderSweep 1.1s ease-in-out infinite;
 }
 @keyframes preloaderSweep {
@@ -56,13 +60,41 @@
   100% { left: 100%; }
 }
 body.is-loaded #preloader {
-  opacity: 0;
+  transform: translateY(-101%);
   visibility: hidden;
   pointer-events: none;
 }
+
+/* Page-exit curtain — same terracotta field sweeps up over the page,
+   logo mark lands, then the next page's preloader lifts away: the logo
+   visually "carries" you between pages */
+.pt {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  background: #c1591f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(101%);
+  transition: transform 0.45s cubic-bezier(0.7, 0, 0.3, 1);
+  pointer-events: none;
+}
+.pt img {
+  width: 64px; height: 64px;
+  border-radius: 16px;
+  opacity: 0;
+  transform: scale(0.5) rotate(-14deg);
+  transition: opacity 0.25s ease 0.18s, transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1.2) 0.18s;
+}
+.pt.is-entering { transform: translateY(0); }
+.pt.is-entering img { opacity: 1; transform: scale(1) rotate(0deg); }
+
 @media (prefers-reduced-motion: reduce) {
   #preloader { transition: none; }
+  #preloader .pre-mark { animation: none; }
   #preloader .pre-bar::after { animation: none; left: 0; width: 100%; }
+  .pt { display: none; }
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -89,8 +121,16 @@ body {
 h1, h2, h3, .serif {
   font-family: 'Instrument Serif', serif;
   font-weight: 400;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.005em;
   margin: 0;
+}
+
+/* Brand tagline — always the same three words, always this treatment */
+.tagline {
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  color: var(--muted);
 }
 a { color: inherit; }
 img { max-width: 100%; }
@@ -826,6 +866,109 @@ ul.checklist li::before {
   color: var(--muted);
   font-size: 0.85rem;
   margin-top: 0.3rem;
+}
+
+/* Service pillars (home) — minimal, borderless, big serif numerals */
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem 2.5rem;
+  margin-top: 3rem;
+}
+@media (max-width: 860px) { .pillar-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+.pillar {
+  display: block;
+  text-decoration: none;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  transition: border-color 0.3s ease;
+}
+.pillar:hover { border-top-color: var(--accent); }
+.pillar .pillar-num {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--accent);
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+.pillar h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.pillar p { color: var(--muted); font-size: 0.92rem; margin: 0 0 1rem; }
+.pillar .pillar-link {
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.pillar:hover .pillar-link { text-decoration: underline; text-underline-offset: 4px; }
+
+/* Trends page — editorial stat blocks */
+.trend-list { max-width: 46rem; margin: 0 auto; }
+.trend {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 0;
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+@media (max-width: 640px) { .trend { grid-template-columns: 1fr; gap: 0.75rem; } }
+.trend .trend-stat {
+  font-family: 'Instrument Serif', serif;
+  font-size: 2.4rem;
+  line-height: 1.05;
+  color: var(--accent);
+}
+.trend .trend-stat small {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+.trend h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+.trend p { color: var(--muted); font-size: 0.94rem; margin: 0; }
+.disclaimer {
+  font-size: 0.78rem;
+  color: var(--muted);
+  border-left: 2px solid var(--border);
+  padding-left: 1rem;
+  max-width: 40rem;
+  margin: 3rem auto 0;
+}
+
+/* Onboarding journey steps (register page) */
+.steps {
+  counter-reset: step;
+  max-width: 46rem;
+  margin: 0 auto 3.5rem;
+}
+.step {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 1.5rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+.step .step-num {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--accent);
+  line-height: 1;
+}
+.step h3 { font-size: 1.15rem; margin-bottom: 0.35rem; }
+.step p { color: var(--muted); font-size: 0.92rem; margin: 0; }
+
+.footer-tagline {
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0.4rem;
 }
 
 /* FAQ accordion (native <details>, no JS needed) */
