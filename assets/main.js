@@ -2,6 +2,22 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isTouch = window.matchMedia('(hover: none)').matches;
 
+  /* Preloader: minimum visible time avoids a flash on fast connections,
+     hard fallback timeout guarantees it never gets stuck if an asset stalls */
+  var minDisplay = reduced ? 0 : 500;
+  var startTime = Date.now();
+  function hidePreloader() {
+    var elapsed = Date.now() - startTime;
+    var wait = Math.max(0, minDisplay - elapsed);
+    setTimeout(function () { document.body.classList.add('is-loaded'); }, wait);
+  }
+  if (document.readyState === 'complete') {
+    hidePreloader();
+  } else {
+    window.addEventListener('load', hidePreloader);
+  }
+  setTimeout(hidePreloader, 3500); /* fallback: never block the page */
+
   /* Sticky header shadow state */
   var header = document.getElementById('site-header');
   if (header) {
@@ -24,6 +40,19 @@
         navToggle.setAttribute('aria-expanded', 'false');
       });
     });
+  }
+
+  /* Hero entrance stagger (kicker -> title -> lede -> ctas) */
+  var heroContent = document.querySelector('.hero-content');
+  if (heroContent && window.gsap) {
+    if (reduced) {
+      gsap.set(heroContent.children, { opacity: 1, y: 0 });
+    } else {
+      gsap.fromTo(heroContent.children,
+        { opacity: 0, y: 22 },
+        { opacity: 1, y: 0, duration: 0.9, stagger: 0.14, ease: 'power2.out', delay: 0.3 }
+      );
+    }
   }
 
   /* Hero Ken Burns crossfade */
@@ -110,8 +139,13 @@
       img.addEventListener('click', function () {
         lightboxImg.src = img.src;
         lightboxImg.alt = img.alt;
-        var cap = img.closest('figure').querySelector('figcaption');
-        lightboxCaption.textContent = cap ? cap.textContent : '';
+        var fig = img.closest('figure');
+        var titleEl = fig.querySelector('.work-title');
+        var mediumEl = fig.querySelector('.work-medium');
+        var parts = [];
+        if (titleEl) parts.push(titleEl.textContent);
+        if (mediumEl) parts.push(mediumEl.textContent);
+        lightboxCaption.textContent = parts.join(' — ');
         lightbox.classList.add('is-open');
       });
     });
