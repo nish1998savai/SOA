@@ -260,6 +260,57 @@
   }
   .contact-links a:hover { border-color: var(--accent); color: var(--accent); }
 
+  /* Works gallery */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+  .gallery figure {
+    margin: 0;
+    grid-column: span 2;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-alt);
+    position: relative;
+  }
+  .gallery figure.wide { grid-column: span 4; }
+  @media (min-width: 700px) {
+    .gallery figure:nth-child(1) { grid-column: span 3; }
+    .gallery figure:nth-child(2) { grid-column: span 1; }
+    .gallery figure:nth-child(6) { grid-column: span 1; }
+    .gallery figure:nth-child(7) { grid-column: span 3; }
+  }
+  .gallery img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .gallery figure:nth-child(1) img,
+  .gallery figure:nth-child(7) img { aspect-ratio: 16 / 10; }
+  .gallery figure:hover img { transform: scale(1.04); }
+  .gallery figcaption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 0.9rem 1rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    color: #fff;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .gallery figure:hover figcaption,
+  .gallery figure:focus-within figcaption { opacity: 1; }
+  @media (max-width: 700px) {
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .gallery figure { grid-column: span 1 !important; }
+  }
+
   footer {
     border-top: 1px solid var(--border);
     padding: 2rem 1.5rem;
@@ -281,6 +332,7 @@
     <nav aria-label="Primary">
       <ul>
         <li><a href="#about">About</a></li>
+        <li><a href="#works">Works</a></li>
         <li><a href="#what-we-do">What We Do</a></li>
         <li><a href="#for-artists">For Artists</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -327,6 +379,52 @@
           placed in rooms where it truly belonged."
           <cite>— Nishi Savai, Founder &amp; Curator</cite>
         </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="works">
+    <div class="wrap">
+      <span class="eyebrow">Featured Works</span>
+      <h2 class="title">From the SOA artist roster.</h2>
+      <p style="max-width:38rem;color:var(--muted);">
+        A glimpse of original work by the artists we represent and commission —
+        oils, watercolours, and mixed media spanning portraiture, landscape,
+        and cultural narrative.
+      </p>
+      <div class="gallery">
+        <figure>
+          <img src="assets/painting1.jpg" alt="Silhouetted figures against a dramatic sunset sky, oil painting" loading="lazy">
+          <figcaption>Oil on canvas — dusk gathering</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/painting2.jpg" alt="Rajasthani dancer in traditional attire before the Hawa Mahal, Jaipur" loading="lazy">
+          <figcaption>Oil on canvas — Jaipur portrait</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/painting3.jpg" alt="Portrait of an elder in a traditional orange turban" loading="lazy">
+          <figcaption>Oil on canvas — portrait study</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/painting4.jpg" alt="Watercolour of a temple courtyard with a large tree and shrine" loading="lazy">
+          <figcaption>Watercolour — temple courtyard</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/painting5.jpg" alt="Sculptural study of a temple carving in sepia tones" loading="lazy">
+          <figcaption>Mixed media — sculptural study</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/painting7.jpg" alt="Still life of two brass pots against a teal background" loading="lazy">
+          <figcaption>Oil on canvas — still life</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/painting6.jpg" alt="Watercolour of a boat moored at a riverside ghat" loading="lazy">
+          <figcaption>Watercolour — riverside ghat</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/painting8.jpg" alt="Watercolour of palm trees along a backwater shoreline" loading="lazy">
+          <figcaption>Watercolour — backwater shoreline</figcaption>
+        </figure>
       </div>
     </div>
   </section>
