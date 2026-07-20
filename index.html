@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Society of Artists</title>
+<style>
+  :root {
+    --bg: #fdfcf9;
+    --fg: #1a1a1a;
+    --accent: #b5482a;
+    --muted: #6b6b6b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14120f;
+      --fg: #f2ede4;
+      --accent: #e0794f;
+      --muted: #a8a29a;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 2rem;
+  }
+  .brush {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  h1 {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    letter-spacing: 0.02em;
+    margin: 0 0 0.5rem;
+    font-weight: normal;
+  }
+  .accent {
+    color: var(--accent);
+    font-style: italic;
+  }
+  p.tagline {
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 32rem;
+    line-height: 1.6;
+    margin: 0.5rem 0 2rem;
+  }
+  .status {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--muted);
+    border-radius: 999px;
+    padding: 0.4rem 1.1rem;
+    opacity: 0.8;
+  }
+  footer {
+    position: absolute;
+    bottom: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+  <div class="brush">🎨</div>
+  <h1>Society of <span class="accent">Artists</span></h1>
+  <p class="tagline">A community for makers, painters, and creators to gather, share, and grow together. Our home on the web is being prepared.</p>
+  <div class="status">Coming soon</div>
+  <footer>societyofartists.in</footer>
+</body>
+</html>
