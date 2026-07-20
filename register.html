@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register as an Artist — Society of Artists</title>
+<meta name="description" content="Apply to join the Society of Artists roster. Open to artists anywhere in the world working across painting, sculpture, photography, digital art, and more.">
+<link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header id="site-header">
+  <div class="nav">
+    <a class="brand" href="index.html#top"><img src="assets/logo-mark.svg" alt="" width="34" height="34">society <span class="accent">of artists</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <nav aria-label="Primary">
+        <ul id="primary-nav">
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#works">Works</a></li>
+          <li><a href="index.html#world-art">World Art</a></li>
+          <li><a href="index.html#community">Community</a></li>
+          <li><a href="index.html#what-we-do">What We Do</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta" id="nav-cta">
+        <a class="btn btn-primary btn-sm is-current" href="register.html">Join as Artist</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">For Artists — Worldwide</span>
+      <h1>Register for the SOA roster.</h1>
+      <p>
+        Open to artists anywhere in the world. Tell us about your practice —
+        we review every submission personally and reach out when there's a
+        genuine fit for a commission, exhibition, or collaboration.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap" style="max-width:760px;">
+      <form class="form-card" data-mailto="nishisavai@societyofartists.in" data-subject="SOA Artist Roster Registration">
+
+        <div class="field-row">
+          <div class="field">
+            <label for="reg-name">Full name</label>
+            <input type="text" id="reg-name" name="name" required data-field="Name">
+          </div>
+          <div class="field">
+            <label for="reg-email">Email</label>
+            <input type="email" id="reg-email" name="email" required data-field="Email">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="reg-country">Country</label>
+            <input type="text" id="reg-country" name="country" required data-field="Country" placeholder="e.g. India, Kenya, Brazil...">
+          </div>
+          <div class="field">
+            <label for="reg-city">City</label>
+            <input type="text" id="reg-city" name="city" data-field="City">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Discipline <span class="hint">select all that apply</span></label>
+          <div class="tag-row">
+            <label class="tag is-selectable"><input type="checkbox" name="discipline" value="Painting" data-field="Disciplines">Painting</label>
+            <label class="tag is-selectable"><input type="checkbox" name="discipline" value="Mixed Media" data-field="Disciplines">Mixed Media</label>
+            <label class="tag is-selectable"><input type="checkbox" name="discipline" value="Sculpture" data-field="Disciplines">Sculpture</label>
+            <label class="tag is-selectable"><input type="checkbox" name="discipline" value="Photography" data-field="Disciplines">Photography</label>
+            <label class="tag is-selectable"><input type="checkbox" name="discipline" value="Digital Art" data-field="Disciplines">Digital Art</label>
+            <label class="tag is-selectable"><input type="checkbox" name="discipline" value="Installation" data-field="Disciplines">Installation</label>
+            <label class="tag is-selectable"><input type="checkbox" name="discipline" value="Textiles" data-field="Disciplines">Textiles</label>
+            <label class="tag is-selectable"><input type="checkbox" name="discipline" value="Illustration" data-field="Disciplines">Illustration</label>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="reg-portfolio">Portfolio / website link</label>
+            <input type="url" id="reg-portfolio" name="portfolio" data-field="Portfolio">
+          </div>
+          <div class="field">
+            <label for="reg-instagram">Instagram handle</label>
+            <input type="text" id="reg-instagram" name="instagram" data-field="Instagram" placeholder="@yourname">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="reg-years">Years of practice</label>
+          <select id="reg-years" name="years" data-field="Years of practice">
+            <option>Under 2 years</option>
+            <option>2–5 years</option>
+            <option>5–10 years</option>
+            <option>10+ years</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="reg-statement">Tell us about your practice</label>
+          <textarea id="reg-statement" name="statement" required data-field="Statement" placeholder="What you make, what drives it, and what kind of collaborations you're looking for."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="reg-source">How did you hear about Society of Artists? <span class="hint">optional</span></label>
+          <input type="text" id="reg-source" name="source" data-field="Source">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit registration</button>
+        <p class="form-note">
+          Submitting opens your email client with your details pre-filled, addressed to our
+          curatorial team — send it to complete your registration. We personally review
+          every application and respond within a few weeks.
+        </p>
+        <p class="form-status" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <img src="assets/logo-mark.svg" alt="">
+  <div class="footer-links">
+    <a href="index.html#about">About</a>
+    <a href="index.html#works">Works</a>
+    <a href="index.html#community">Community</a>
+    <a href="register.html">Join as Artist</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  society of artists · Mumbai, India · &copy; 2026
+</footer>
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/vanilla-tilt.min.js"></script>
+<script src="assets/vendor/zdog.dist.min.js"></script>
+<script src="assets/main.js"></script>
+
+</body>
+</html>

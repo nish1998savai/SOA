@@ -5,555 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Society of Artists — Creators | Curators | Story Tellers</title>
 <meta name="description" content="Society of Artists is a Mumbai-based art curation and commissioning collective — connecting artists with brands, spaces, and collectors through murals, exhibitions, and cultural collaborations.">
+<link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #fdfcf9;
-    --bg-alt: #f3efe7;
-    --fg: #1a1a1a;
-    --muted: #6b6b6b;
-    --accent: #b5482a;
-    --accent-2: #2f5d62;
-    --border: rgba(26,26,26,0.12);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #14120f;
-      --bg-alt: #1c1913;
-      --fg: #f2ede4;
-      --muted: #a8a29a;
-      --accent: #e0794f;
-      --accent-2: #6fb3b8;
-      --border: rgba(242,237,228,0.14);
-    }
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--fg);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-  h1, h2, h3, .serif {
-    font-family: 'Playfair Display', serif;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    margin: 0;
-  }
-  a { color: inherit; }
-  img { max-width: 100%; }
-  .wrap {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-  .accent { color: var(--accent); font-style: italic; }
-
-  /* Header */
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 50;
-    background: color-mix(in srgb, var(--bg) 85%, transparent);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s ease, background 0.3s ease;
-  }
-  header.scrolled { border-bottom-color: var(--border); }
-  .nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.1rem 1.5rem;
-    max-width: 1140px;
-    margin: 0 auto;
-  }
-  .brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    letter-spacing: 0.03em;
-    text-decoration: none;
-  }
-  .brand .accent { font-style: normal; }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-    margin: 0;
-    padding: 0;
-  }
-  nav ul a {
-    text-decoration: none;
-    font-size: 0.92rem;
-    color: var(--muted);
-    transition: color 0.2s ease;
-    position: relative;
-  }
-  nav ul a::after {
-    content: "";
-    position: absolute;
-    left: 0; right: 0; bottom: -4px;
-    height: 1px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s ease;
-  }
-  nav ul a:hover, nav ul a:focus-visible { color: var(--fg); }
-  nav ul a:hover::after { transform: scaleX(1); }
-
-  .nav-toggle {
-    display: none;
-    width: 40px; height: 40px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-  }
-  .nav-toggle span {
-    width: 22px; height: 1.5px;
-    background: var(--fg);
-    transition: transform 0.25s ease, opacity 0.25s ease;
-  }
-  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-  @media (max-width: 780px) {
-    .nav-toggle { display: flex; }
-    nav ul {
-      position: fixed;
-      top: 66px; left: 0; right: 0;
-      flex-direction: column;
-      gap: 0;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-    nav ul.is-open { max-height: 420px; }
-    nav ul a {
-      display: block;
-      padding: 1rem 1.5rem;
-      border-top: 1px solid var(--border);
-    }
-    nav ul a::after { display: none; }
-  }
-
-  /* ===== Hero ===== */
-  .hero {
-    position: relative;
-    height: 100svh;
-    min-height: 560px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    color: #fdfcf9;
-    text-align: center;
-  }
-  .hero-slides {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-  .hero-slide {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transform: scale(1.12);
-    will-change: transform, opacity;
-  }
-  .hero-slide.is-active { opacity: 1; }
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(180deg, rgba(10,9,7,0.55) 0%, rgba(10,9,7,0.35) 45%, rgba(10,9,7,0.75) 100%);
-  }
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 0 1.5rem;
-  }
-  .hero .kicker {
-    text-transform: uppercase;
-    letter-spacing: 0.22em;
-    font-size: 0.78rem;
-    color: rgba(253,252,249,0.85);
-    margin-bottom: 1.25rem;
-    display: block;
-  }
-  .hero h1 {
-    font-size: clamp(2.4rem, 6.4vw, 4.6rem);
-    line-height: 1.06;
-    max-width: 18em;
-    margin: 0 auto;
-    text-wrap: balance;
-  }
-  .hero p.lede {
-    max-width: 36rem;
-    margin: 1.75rem auto 0;
-    color: rgba(253,252,249,0.85);
-    font-size: 1.1rem;
-  }
-  .hero .ctas {
-    margin-top: 2.5rem;
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .btn {
-    display: inline-block;
-    padding: 0.85rem 1.75rem;
-    border-radius: 999px;
-    font-size: 0.92rem;
-    text-decoration: none;
-    transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
-    border: 1px solid transparent;
-  }
-  .btn:hover { transform: translateY(-2px); }
-  .btn-primary { background: var(--accent); color: #fff; }
-  .btn-primary:hover { box-shadow: 0 10px 30px rgba(181,72,42,0.35); }
-  .btn-outline { border-color: rgba(253,252,249,0.5); color: #fdfcf9; }
-  .btn-outline:hover { background: rgba(253,252,249,0.1); }
-
-  .scroll-cue {
-    position: absolute;
-    bottom: 1.75rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-    color: rgba(253,252,249,0.75);
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-  .scroll-cue .line {
-    width: 1px;
-    height: 34px;
-    background: rgba(253,252,249,0.5);
-    overflow: hidden;
-    position: relative;
-  }
-  .scroll-cue .line::after {
-    content: "";
-    position: absolute;
-    top: -100%;
-    left: 0; right: 0;
-    height: 100%;
-    background: #fdfcf9;
-    animation: scrollDrop 1.8s ease-in-out infinite;
-  }
-  @keyframes scrollDrop {
-    0% { top: -100%; }
-    60% { top: 100%; }
-    100% { top: 100%; }
-  }
-
-  /* Orbiting 3D ornament (Zdog) */
-  .hero-orn {
-    position: absolute;
-    z-index: 2;
-    top: 18%;
-    right: 6%;
-    width: 130px;
-    height: 130px;
-    opacity: 0.9;
-    pointer-events: none;
-  }
-  @media (max-width: 780px) { .hero-orn { display: none; } }
-
-  section { padding: 6rem 0; }
-  .section-alt { background: var(--bg-alt); }
-  .eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 0.75rem;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 0.75rem;
-  }
-  h2.title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 1.25rem; }
-  .reveal { opacity: 0; }
-
-  /* About */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 3.5rem;
-    align-items: start;
-  }
-  @media (max-width: 800px) {
-    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  }
-  blockquote {
-    margin: 1.5rem 0 0;
-    padding-left: 1.25rem;
-    border-left: 2px solid var(--accent);
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.15rem;
-    color: var(--fg);
-  }
-  blockquote cite {
-    display: block;
-    margin-top: 0.75rem;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-size: 0.85rem;
-    color: var(--muted);
-  }
-
-  /* Services */
-  .grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.75rem;
-    margin-top: 2.5rem;
-  }
-  @media (max-width: 860px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .grid-3 { grid-template-columns: 1fr; } }
-  .card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 1.75rem;
-    transform-style: preserve-3d;
-    will-change: transform;
-  }
-  .card svg { width: 34px; height: 34px; color: var(--accent); margin-bottom: 1rem; transform: translateZ(25px); }
-  .card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; transform: translateZ(20px); }
-  .card p { color: var(--muted); font-size: 0.94rem; margin: 0; transform: translateZ(20px); }
-
-  /* Lightbox */
-  .lightbox {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    background: rgba(10,9,7,0.92);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 3rem 1.5rem;
-  }
-  .lightbox.is-open { display: flex; }
-  .lightbox img { max-width: 90vw; max-height: 80vh; border-radius: 6px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
-  .lightbox figcaption { color: #f2ede4; text-align: center; margin-top: 1rem; font-size: 0.9rem; letter-spacing: 0.03em; }
-  .lightbox-close {
-    position: absolute;
-    top: 1.5rem; right: 1.5rem;
-    width: 42px; height: 42px;
-    border-radius: 50%;
-    border: 1px solid rgba(242,237,228,0.4);
-    background: transparent;
-    color: #f2ede4;
-    font-size: 1.3rem;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .lightbox-close:hover { background: rgba(242,237,228,0.12); }
-  .gallery img { cursor: zoom-in; }
-
-  /* Disciplines */
-  .tag-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-top: 1.5rem;
-  }
-  .tag {
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 0.45rem 1rem;
-    font-size: 0.85rem;
-    color: var(--muted);
-  }
-
-  /* For Artists */
-  .split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-  }
-  @media (max-width: 800px) { .split { grid-template-columns: 1fr; } }
-  ul.checklist { list-style: none; padding: 0; margin: 1.5rem 0 0; }
-  ul.checklist li {
-    padding-left: 1.6rem;
-    position: relative;
-    margin-bottom: 0.9rem;
-    color: var(--muted);
-  }
-  ul.checklist li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.5em;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-
-  /* Contact */
-  .contact-box {
-    text-align: center;
-    max-width: 40rem;
-    margin: 0 auto;
-  }
-  .contact-links {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    margin-top: 2rem;
-    font-size: 0.95rem;
-  }
-  .contact-links a {
-    text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 2px;
-    transition: border-color 0.2s ease, color 0.2s ease;
-  }
-  .contact-links a:hover { border-color: var(--accent); color: var(--accent); }
-
-  /* Works gallery */
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    margin-top: 2.5rem;
-  }
-  .gallery figure {
-    margin: 0;
-    grid-column: span 2;
-    border-radius: 12px;
-    overflow: hidden;
-    background: var(--bg-alt);
-    position: relative;
-    transform-style: preserve-3d;
-    will-change: transform;
-  }
-  @media (min-width: 700px) {
-    .gallery figure:nth-child(1) { grid-column: span 3; }
-    .gallery figure:nth-child(2) { grid-column: span 1; }
-    .gallery figure:nth-child(6) { grid-column: span 1; }
-    .gallery figure:nth-child(7) { grid-column: span 3; }
-  }
-  .gallery img {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    display: block;
-    transform: translateZ(0) scale(1.001);
-    transition: transform 0.5s ease;
-  }
-  .gallery figure:nth-child(1) img,
-  .gallery figure:nth-child(7) img { aspect-ratio: 16 / 10; }
-  .gallery figure:hover img { transform: scale(1.06); }
-  .gallery figcaption {
-    position: absolute;
-    inset: auto 0 0 0;
-    padding: 0.9rem 1rem;
-    font-size: 0.78rem;
-    letter-spacing: 0.03em;
-    color: #fff;
-    background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
-    opacity: 0;
-    transition: opacity 0.25s ease;
-    transform: translateZ(30px);
-  }
-  .gallery figure:hover figcaption,
-  .gallery figure:focus-within figcaption { opacity: 1; }
-  @media (max-width: 700px) {
-    .gallery { grid-template-columns: repeat(2, 1fr); }
-    .gallery figure { grid-column: span 1 !important; }
-  }
-
-  /* World Art illustration band */
-  .world-intro { max-width: 42rem; }
-  .world-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 2.75rem;
-  }
-  @media (max-width: 900px) { .world-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .world-grid { grid-template-columns: 1fr; } }
-  .world-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.5rem;
-    text-align: center;
-    transform-style: preserve-3d;
-    will-change: transform;
-  }
-  .world-card svg { width: 100%; height: 140px; display: block; margin: 0 auto 1rem; }
-  .world-card h3 { font-size: 1.05rem; transform: translateZ(20px); }
-  .world-card p { color: var(--muted); font-size: 0.85rem; margin: 0.4rem 0 0; transform: translateZ(20px); }
-  .world-card .region { color: var(--accent); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; transform: translateZ(20px); display:block; margin-top:0.5rem; }
-
-  .draw-path { stroke-dasharray: var(--len, 800); stroke-dashoffset: var(--len, 800); }
-  .draw-path.drawn { stroke-dashoffset: 0; transition: stroke-dashoffset 1.6s ease; }
-
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem 1.5rem;
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
-    .hero-slide { opacity: 1 !important; transform: none !important; }
-    .hero-slide:not(:first-child) { display: none; }
-    .reveal { opacity: 1 !important; transform: none !important; }
-  }
-</style>
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
 <header id="site-header">
   <div class="nav">
-    <a class="brand" href="#top">society <span class="accent">of artists</span></a>
+    <a class="brand" href="index.html#top"><img src="assets/logo-mark.svg" alt="" width="34" height="34">society <span class="accent">of artists</span></a>
     <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation menu">
       <span></span><span></span><span></span>
     </button>
-    <nav aria-label="Primary">
-      <ul id="primary-nav">
-        <li><a href="#about">About</a></li>
-        <li><a href="#works">Works</a></li>
-        <li><a href="#world-art">World Art</a></li>
-        <li><a href="#what-we-do">What We Do</a></li>
-        <li><a href="#for-artists">For Artists</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <div class="nav-links">
+      <nav aria-label="Primary">
+        <ul id="primary-nav">
+          <li><a href="#about">About</a></li>
+          <li><a href="#works">Works</a></li>
+          <li><a href="#world-art">World Art</a></li>
+          <li><a href="#community">Community</a></li>
+          <li><a href="#what-we-do">What We Do</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta" id="nav-cta">
+        <a class="btn btn-primary btn-sm" href="register.html">Join as Artist</a>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -577,7 +57,7 @@
       </p>
       <div class="ctas">
         <a class="btn btn-primary" href="#what-we-do">Explore what we do</a>
-        <a class="btn btn-outline" href="#for-artists">Join our roster</a>
+        <a class="btn btn-outline" href="register.html">Join our roster</a>
       </div>
     </div>
     <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
@@ -763,7 +243,52 @@
     </div>
   </section>
 
-  <section id="what-we-do" class="section-alt">
+  <section id="community" class="section-alt">
+    <div class="wrap">
+      <span class="eyebrow reveal">Community</span>
+      <h2 class="title reveal">A society, not just a directory.</h2>
+      <p class="reveal" style="max-width:38rem;color:var(--muted);">
+        SOA is built around gathering, not just listing. Members get access to a
+        running calendar of previews, studio visits, and conversations designed to
+        put artists and collectors in the same room.
+      </p>
+      <div class="community-grid">
+        <div class="community-card tilt-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19V7l8-4 8 4v12" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 19h16M9 19v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Private Previews</h3>
+          <p>First look at new work, before it's shown publicly.</p>
+        </div>
+        <div class="community-card tilt-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" stroke-linecap="round"/></svg>
+          <h3>Artist Studio Visits</h3>
+          <p>Small-group sessions inside a roster artist's own studio.</p>
+        </div>
+        <div class="community-card tilt-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l2.6 5.6L21 9.3l-4.5 4.2L17.6 20 12 16.8 6.4 20l1.1-6.5L3 9.3l6.4-.7L12 3z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Member Spotlights</h3>
+          <p>Roster artists featured across our channels on rotation.</p>
+        </div>
+        <div class="community-card tilt-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="9" r="3"/><circle cx="17" cy="7" r="2.4"/><path d="M3.5 19c0-3 2.2-5 4.5-5s4.5 2 4.5 5" stroke-linecap="round"/><path d="M14 19c0-2.2 1.6-3.8 3.5-3.8s3.5 1.6 3.5 3.8" stroke-linecap="round"/></svg>
+          <h3>Collector Circle</h3>
+          <p>Direct, ongoing introductions between artists and collectors.</p>
+        </div>
+      </div>
+
+      <div class="community-cta reveal">
+        <div>
+          <h3 style="font-size:1.1rem;margin-bottom:0.3rem;">Join the community mailing list</h3>
+          <p style="color:var(--muted);font-size:0.88rem;margin:0;">No spam — just previews, spotlights, and event invites.</p>
+        </div>
+        <form data-mailto="nishisavai@societyofartists.in" data-subject="Community mailing list signup">
+          <input type="email" name="email" placeholder="you@email.com" required data-field="Email" aria-label="Email address">
+          <button type="submit" class="btn btn-primary btn-sm">Join</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="what-we-do">
     <div class="wrap">
       <span class="eyebrow reveal">What We Do</span>
       <h2 class="title reveal">Creative direction, curated and executed end to end.</h2>
@@ -807,7 +332,7 @@
     </div>
   </section>
 
-  <section id="for-artists">
+  <section id="for-artists" class="section-alt">
     <div class="wrap split">
       <div class="reveal">
         <span class="eyebrow">For Artists</span>
@@ -837,34 +362,37 @@
           <li>Thoughtful representation and creative support</li>
           <li>Stronger industry and collector connections</li>
           <li>Strategic brand and cultural partnerships</li>
-          <li>A platform of, and for, like-minded creatives</li>
+          <li>A platform of, and for, like-minded creatives — open to artists anywhere in the world</li>
         </ul>
-        <a class="btn btn-primary" style="margin-top:1rem;" href="mailto:nishisavai@societyofartists.in?subject=Joining%20the%20SOA%20Roster">
-          Apply to join
+        <a class="btn btn-primary" style="margin-top:1rem;" href="register.html">
+          Register as an artist
         </a>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="section-alt">
+  <section id="contact">
     <div class="wrap contact-box reveal">
       <span class="eyebrow">Get in Touch</span>
       <h2 class="title">Creating meaningful opportunities, one collaboration at a time.</h2>
       <p style="color:var(--muted);">
-        Have a space, a brand, or a project in mind? We'd be glad to discuss the
-        right experience for it.
+        Have a space, a brand, or a project in mind?
       </p>
-      <div class="contact-links">
-        <a href="mailto:nishisavai@societyofartists.in">nishisavai@societyofartists.in</a>
-        <a href="tel:+919820972689">+91 98209 72689</a>
-        <a href="https://instagram.com/societyofartists__" target="_blank" rel="noopener">@societyofartists__</a>
-      </div>
+      <a class="btn btn-primary" href="contact.html">Go to Contact page</a>
     </div>
   </section>
 
 </main>
 
 <footer>
+  <img src="assets/logo-mark.svg" alt="">
+  <div class="footer-links">
+    <a href="index.html#about">About</a>
+    <a href="index.html#works">Works</a>
+    <a href="index.html#community">Community</a>
+    <a href="register.html">Join as Artist</a>
+    <a href="contact.html">Contact</a>
+  </div>
   society of artists · Mumbai, India · &copy; 2026
 </footer>
 
@@ -880,163 +408,7 @@
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script src="assets/vendor/vanilla-tilt.min.js"></script>
 <script src="assets/vendor/zdog.dist.min.js"></script>
-<script>
-(function () {
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var isTouch = window.matchMedia('(hover: none)').matches;
-
-  /* Sticky header shadow state */
-  var header = document.getElementById('site-header');
-  window.addEventListener('scroll', function () {
-    header.classList.toggle('scrolled', window.scrollY > 20);
-  }, { passive: true });
-
-  /* Mobile nav toggle */
-  var navToggle = document.getElementById('nav-toggle');
-  var primaryNav = document.getElementById('primary-nav');
-  navToggle.addEventListener('click', function () {
-    var open = primaryNav.classList.toggle('is-open');
-    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  primaryNav.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', function () {
-      primaryNav.classList.remove('is-open');
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-
-  /* Hero Ken Burns crossfade */
-  var slides = document.querySelectorAll('.hero-slide');
-  if (!reduced && slides.length) {
-    var i = 0;
-    slides.forEach(function (s, idx) {
-      gsap.set(s, { scale: idx === 0 ? 1.06 : 1.12 });
-    });
-    function nextSlide() {
-      var current = slides[i];
-      var next = slides[(i + 1) % slides.length];
-      gsap.to(current, { opacity: 0, scale: 1.18, duration: 2, ease: 'power1.inOut' });
-      gsap.fromTo(next, { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1.02, duration: 2, ease: 'power1.inOut' });
-      current.classList.remove('is-active');
-      next.classList.add('is-active');
-      i = (i + 1) % slides.length;
-    }
-    gsap.to(slides[0], { scale: 1.0, duration: 7, ease: 'none' });
-    setInterval(nextSlide, 5500);
-  }
-
-  /* GSAP + ScrollTrigger reveals */
-  if (window.gsap && window.ScrollTrigger) {
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.utils.toArray('.reveal').forEach(function (el) {
-      if (reduced) { gsap.set(el, { opacity: 1 }); return; }
-      gsap.fromTo(el, { opacity: 0, y: 28 }, {
-        opacity: 1, y: 0, duration: 0.9, ease: 'power2.out',
-        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
-      });
-    });
-
-    gsap.utils.toArray('.grid-3, .gallery, .world-grid').forEach(function (grid) {
-      var items = grid.children;
-      if (reduced) { gsap.set(items, { opacity: 1 }); return; }
-      gsap.fromTo(items, { opacity: 0, y: 40 }, {
-        opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: 'power2.out',
-        scrollTrigger: { trigger: grid, start: 'top 82%', once: true }
-      });
-    });
-
-    /* Draw-in world-art SVG paths */
-    gsap.utils.toArray('.draw-path').forEach(function (path) {
-      var len = path.getTotalLength ? path.getTotalLength() : 800;
-      path.style.setProperty('--len', len);
-      ScrollTrigger.create({
-        trigger: path.closest('.world-card'),
-        start: 'top 85%',
-        once: true,
-        onEnter: function () { path.classList.add('drawn'); }
-      });
-    });
-  }
-
-  /* Mandala slow spin */
-  if (!reduced) {
-    document.querySelectorAll('.mandala-spin').forEach(function (g) {
-      gsap.to(g, { rotation: 360, duration: 40, repeat: -1, ease: 'none', transformOrigin: '0px 0px' });
-    });
-  }
-
-  /* 3D tilt on cards/gallery/world-cards */
-  if (window.VanillaTilt && !isTouch) {
-    VanillaTilt.init(document.querySelectorAll('.tilt-card'), {
-      max: 8,
-      speed: 400,
-      glare: true,
-      'max-glare': 0.18,
-      scale: 1.02,
-      perspective: 900
-    });
-  }
-
-  /* Gallery lightbox */
-  var lightbox = document.getElementById('lightbox');
-  var lightboxImg = document.getElementById('lightbox-img');
-  var lightboxCaption = document.getElementById('lightbox-caption');
-  document.querySelectorAll('.gallery figure img').forEach(function (img) {
-    img.addEventListener('click', function () {
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      var cap = img.closest('figure').querySelector('figcaption');
-      lightboxCaption.textContent = cap ? cap.textContent : '';
-      lightbox.classList.add('is-open');
-    });
-  });
-  function closeLightbox() { lightbox.classList.remove('is-open'); lightboxImg.src = ''; }
-  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
-
-  /* Zdog 3D ornament in hero — an orbiting ring motif */
-  if (window.Zdog && !reduced) {
-    var illo = new Zdog.Illustration({
-      element: '#hero-orn',
-      zoom: 1.1,
-      dragRotate: false
-    });
-    new Zdog.Shape({
-      addTo: illo,
-      path: [{ x: 0, y: -46 }],
-      stroke: 0
-    });
-    var ring1 = new Zdog.Ellipse({
-      addTo: illo,
-      diameter: 90,
-      stroke: 6,
-      color: '#e0794f',
-      rotate: { x: Zdog.TAU / 5 }
-    });
-    var ring2 = new Zdog.Ellipse({
-      addTo: illo,
-      diameter: 62,
-      stroke: 5,
-      color: '#f2ede4',
-      rotate: { x: Zdog.TAU / 4, y: Zdog.TAU / 8 }
-    });
-    var core = new Zdog.Shape({
-      addTo: illo,
-      stroke: 14,
-      color: '#2f5d62'
-    });
-    function animateOrn() {
-      illo.rotate.y += 0.006;
-      illo.rotate.x += 0.002;
-      illo.updateRenderGraph();
-      requestAnimationFrame(animateOrn);
-    }
-    animateOrn();
-  }
-})();
-</script>
+<script src="assets/main.js"></script>
 
 </body>
 </html>
